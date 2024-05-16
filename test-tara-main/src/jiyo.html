@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Student Registration Form</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			background-color: #f8f9fa;
+		}
+		h1 {
+			text-align: center;
+			margin-top: 50px;
+		}
+		form {
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px #ccc;
+			padding: 30px;
+			margin-top: 50px;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
+			box-sizing: border-box;
+		}
+		label {
+			font-size: 16px;
+			font-weight: bold;
+			display: block;
+			margin-bottom: 5px;
+		}
+		input, select {
+			margin-bottom: 20px;
+			padding: 10px;
+			font-size: 16px;
+			border-radius: 5px;
+			border: none;
+			box-shadow: 0px 0px 5px #ccc;
+			width: 100%;
+			max-width: 400px;
+			box-sizing: border-box;
+		}
+		input[type="submit"] {
+			background-color: #007bff;
+			color: #fff;
+			cursor: pointer;
+		}
+		input[type="submit"]:hover {
+			background-color: #0069d9;
+		}
+		.error {
+			color: red;
+			font-size: 12px;
+			margin-top: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Student Registration Form</h1>
+	<form id="registration-form">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required>
+		<span class="error" id="name-error"></span>
+
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" required>
+		<span class="error" id="email-error"></span>
+
+		<label for="phone">Phone:</label>
+		<input type="tel" id="phone" name="phone" required>
+		<span class="error" id="phone-error"></span>
+
+		<label for="age">Age:</label>
+		<input type="number" id="age" name="age" min="1" max="120" required>
+		<span class="error" id="age-error"></span>
+
+		<label for="gender">Gender:</label>
+		<select id="gender" name="gender" required>
+			<option value="">Select gender</option>
+			<option value="male">Male</option>
+			<option value="female">Female</option>
+			<option value="other">Other</option>
+		</select>
+		<span class="error" id="gender-error"></span>
+
+		<input type="submit" value="Register">
+	</form>
+	<script>
+		const form = document.getElementById("registration-form");
+
+		// Validate form fields
+		const validateForm = () => {
+			let isValid = true;
+
+			const name = document.getElementById("name").value;
+			const email = document.getElementById("email").value;
+			const phone = document.getElementById("phone").value;
+			const age = document.getElementById("age").value;
+			const gender = document.getElementById("gender").value;
+
+			const nameError = document.getElementById("name-error");
+			const emailError = document
+            document.getElementById("email-error");
+            const phoneError = document.getElementById("phone-error");
+            const ageError = document.getElementById("age-error");
+            const genderError = document.getElementById("gender-error"); 
+            		// Reset error messages
+		nameError.textContent = "";
+		emailError.textContent = "";
+		phoneError.textContent = "";
+		ageError.textContent = "";
+		genderError.textContent = "";
+
+		// Validate name field
+		if (name.trim() === "") {
+			nameError.textContent = "Name is required";
+			isValid = false;
+		}
+
+		// Validate email field
+		if (email.trim() === "") {
+			emailError.textContent = "Email is required";
+			isValid = false;
+		} else if (!isValidEmail(email)) {
+			emailError.textContent = "Invalid email format";
+			isValid = false;
+		}
+
+		// Validate phone field
+		if (phone.trim() === "") {
+			phoneError.textContent = "Phone is required";
+			isValid = false;
+		} else if (!isValidPhone(phone)) {
+			phoneError.textContent = "Invalid phone number format";
+			isValid = false;
+		}
+
+		// Validate age field
+		if (age < 1 || age > 120) {
+			ageError.textContent = "Age must be between 1 and 120";
+			isValid = false;
+		}
+
+		// Validate gender field
+		if (gender === "") {
+			genderError.textContent = "Gender is required";
+			isValid = false;
+		}
+
+		return isValid;
+	};
+
+	// Helper function to validate email format
+	const isValidEmail = (email) => {
+		const emailRegex = /\S+@\S+\.\S+/;
+		return emailRegex.test(email);
+	};
+
+	// Helper function to validate phone number format
+	const isValidPhone = (phone) => {
+		const phoneRegex = /^[0-9]{10}$/;
+		return phoneRegex.test(phone);
+	};
+
+	// Handle form submission
+	form.addEventListener("submit", (event) => {
+		event.preventDefault();
+
+		if (validateForm()) {
+			// TODO: Submit form data to server
+			alert("Form submitted successfully");
+		}
+	});
+</script>
+</body>
+</html>

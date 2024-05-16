@@ -1,0 +1,69 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main  # Change this to your desired branch
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get install -y python3-pip
+          pip3 install awscli --upgrade --user
+          pip3 install pyOpenSSL --upgrade
+          
+      - name: Install npm package from .tgz
+        run: npm install frontend.kit-npm-3.4.0.tgz
+        
+      - name: Install Dependencies
+        run: npm install
+      
+      - name: Install fernet
+        run: npm install fernet
+        
+      - name: Install crypto
+        run: npm install crypto-browserify
+      
+      - name: Install stream
+        run: npm install stream-browserify
+        
+      - name: Install buffer
+        run: npm install buffer
+
+      - name: Build React App
+        run: npm run ci
+
+      - name: Zip Build Folder
+        run: |
+          # zip -r build.zip build/*
+          cd build && zip -r ../build.zip .
+        working-directory: ${{ github.workspace }}
+        
+      - name: Update ub
+        run: |
+          sudo apt-get update
+          sudo apt-get install --only-upgrade openssl
+          pip install pyOpenSSL
+
+
+      - name: Build and Deploy
+        run: |
+          # Configure AWS CLI with GitHub secrets
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region ap-south-1
+          # Sync the build folder to your S3 bucket
+          aws s3 cp build.zip s3://test-tara/build.zip
