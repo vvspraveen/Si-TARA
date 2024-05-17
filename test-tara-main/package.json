@@ -11,7 +11,7 @@
     "@lottiefiles/lottie-player": "^2.0.4",
     "@lottiefiles/react-lottie-player": "^3.5.2",
     "@mui/icons-material": "^5.11.9",
-    "@mui/material": "^5.10.12",
+    "@mui/material": "^5.15.15",
     "@mui/x-data-grid": "6.18.6",
     "@mui/x-data-grid-generator": "6.19.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
