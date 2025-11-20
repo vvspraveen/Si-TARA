@@ -16,7 +16,7 @@
     "@mui/x-data-grid-generator": "6.19.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@react-pdf-viewer/core": "^3.12.0",
-    "@svgr/webpack": "^5.5.0",
+    "@svgr/webpack": "^6.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -43,7 +43,7 @@
     "d3": "^7.8.5",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
-    "eslint": "^8.3.0",
+    "eslint": "^9.0.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-webpack-plugin": "^3.1.1",
     "express": "^4.18.2",
@@ -97,7 +97,7 @@
     "webpack": "^5.64.4",
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
-    "workbox-webpack-plugin": "^6.4.1",
+    "workbox-webpack-plugin": "^7.4.0",
     "xlsx": "^0.18.5"
   },
   "scripts": {
